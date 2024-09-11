@@ -26,4 +26,4 @@ EXPOSE 3333
 # CMD ["node", "build/server.js"]
 
 # Add this command to check if environment variables are being passed
-CMD ["sh", "-c", "printenv && node build/server.js"]
+CMD ["sh", "-c", "printenv && node build/bin/server.js"]
