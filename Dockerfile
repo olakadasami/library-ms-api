@@ -26,3 +26,9 @@ COPY --chown=node:node ./package*.json ./
 RUN npm ci --only=production
 COPY --chown=node:node --from=build /home/node/app/build .
 EXPOSE $PORT
+
+# Run database migrations
+RUN node ace migration:run --force
+
+# Start the application
+CMD ["node", "build/server.js"]
