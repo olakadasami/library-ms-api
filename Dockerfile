@@ -20,7 +20,10 @@ RUN npm run build
 EXPOSE 3333
 
 # Run database migrations
-RUN node ace migration:run --force
+# RUN node ace migration:run --force
 
 # Start the application using variables from Koyeb
-CMD ["node", "build/server.js"]
+# CMD ["node", "build/server.js"]
+
+# Add this command to check if environment variables are being passed
+CMD ["sh", "-c", "printenv && node build/server.js"]
