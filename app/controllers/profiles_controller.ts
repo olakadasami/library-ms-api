@@ -8,7 +8,7 @@ export default class ProfilesController {
    *
    * POST ''
    */
-  async store({ request, bouncer, auth }: HttpContext) {
+  async store({ request, auth }: HttpContext) {
     const user = auth.getUserOrFail()
     const userData = await request.validateUsing(profileUpdateValidator)
 
@@ -23,7 +23,7 @@ export default class ProfilesController {
    * Show individual record
    *
    */
-  async show({ bouncer, auth }: HttpContext) {
+  async show({ auth }: HttpContext) {
     const user = auth.getUserOrFail()
 
     // await bouncer.with(UserPolicy).authorize('view')
@@ -38,7 +38,7 @@ export default class ProfilesController {
    *
    * PATCH
    */
-  async update({ request, bouncer, auth, response }: HttpContext) {
+  async update({ request, auth, response }: HttpContext) {
     const user = auth.getUserOrFail()
     const profileData = await request.validateUsing(profileUpdateValidator)
 
@@ -51,7 +51,7 @@ export default class ProfilesController {
    * Delete record
    *
    */
-  async destroy({ response, bouncer, auth }: HttpContext) {
+  async destroy({ response, auth }: HttpContext) {
     const user = auth.getUserOrFail()
 
     await Profile.query().where('userId', user.id).delete()
