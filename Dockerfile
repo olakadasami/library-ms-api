@@ -1,34 +1,26 @@
-ARG NODE_IMAGE=node:20.12.1-bullseye-slim
+# Use official Node.js image
+FROM node:22.0.0-alpine
 
-###### First Stage - Creating base ######
-FROM $NODE_IMAGE as base
-RUN mkdir -p /home/node/app && chown node:node /home/node/app 
-WORKDIR /home/node/app
-USER node
-RUN mkdir tmp
+# Set the working directory inside the container
+WORKDIR /app
 
-###### Second Stage - Installing dependencies ######
-FROM base AS dependencies
-COPY --chown=node:node ./package*.json ./
-RUN npm ci
-COPY --chown=node:node . .
+# Copy package.json and package-lock.json first to leverage Docker caching
+COPY package*.json ./
 
-###### Third Stage - Building Stage ######
-FROM dependencies AS build
-RUN node ace build
+# Install the dependencies
+RUN npm install
 
-###### Final Stage - Production ######
-FROM base as production
-ENV NODE_ENV=production
-ENV PORT=$PORT
-ENV HOST=0.0.0.0
-COPY --chown=node:node ./package*.json ./
-RUN npm ci --only=production
-COPY --chown=node:node --from=build /home/node/app/build .
-EXPOSE $PORT
+# Copy the rest of the application code
+COPY . .
+
+# Build the TypeScript code
+RUN npm run build
+
+# Expose the port that AdonisJS will use
+EXPOSE 3333
 
 # Run database migrations
 RUN node ace migration:run --force
 
-# Start the application
+# Start the application using variables from Koyeb
 CMD ["node", "build/server.js"]
