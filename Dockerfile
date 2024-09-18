@@ -16,6 +16,9 @@ COPY . .
 # Build the TypeScript code
 RUN npm run build
 
+# Build the TypeScript code
+RUN npm run postbuild
+
 # Expose the port that AdonisJS will use
 EXPOSE 3333
 
@@ -23,7 +26,4 @@ EXPOSE 3333
 # RUN node ace migration:run --force
 
 # Start the application using variables from Koyeb
-# CMD ["node", "build/server.js"]
-
-# Add this command to check if environment variables are being passed
-CMD ["sh", "-c", "printenv && node build/bin/server.js"]
+CMD ["node build/bin/server.js"]
