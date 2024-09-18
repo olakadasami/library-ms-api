@@ -68,7 +68,7 @@ export default class BooksController {
   }
 
   /**
-   * @responseBody 200
+   * @responseBody 200 - <Book>
    * @responseBody 404 - Product could not be found
    * @requestBody <Book>
    */
