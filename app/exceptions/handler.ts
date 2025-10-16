@@ -2,6 +2,7 @@ import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 import { errors as authErrors } from '@adonisjs/auth'
 import { errors } from '@adonisjs/core'
+import { Sentry } from '@rlanz/sentry'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -55,6 +56,9 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * @note You should not attempt to send a response from this method.
    */
   async report(error: unknown, ctx: HttpContext) {
+    if (this.shouldReport(error as any)) {
+      Sentry.captureException(error)
+    }
     return super.report(error, ctx)
   }
 }
