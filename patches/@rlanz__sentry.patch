@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 79e8cdf5dbc565c3bb45ef06ebe84cd8bcd6d2d7..c89240142402486433e1bd1e67fdbfa544bd9a3b 100644
+--- a/package.json
++++ b/package.json
+@@ -18,7 +18,7 @@
+   "scripts": {
+     "build": "yarn clean && tsc && yarn copy:templates",
+     "clean": "del-cli build",
+-    "copy:templates": "copyfiles \"stubs/**/*.stub\" --up=\"1\" build",
++    "copy:templates": "copyfiles \"stubs/**/*.stub\" --up=\"1\" build/stubs",
+     "format": "prettier --write .",
+     "lint": "eslint . --ext=.ts",
+     "prepublishOnly": "yarn build",

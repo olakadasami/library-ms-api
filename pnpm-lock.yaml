@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@rlanz/sentry':
+    hash: 440bd8e10e461a07839b1c21e9e6170476bcdd9553e4f9e901f63b0b4ed17f7c
+    path: patches/@rlanz__sentry.patch
+
 importers:
 
   .:
@@ -28,7 +33,7 @@ importers:
         version: 9.2.2(@adonisjs/core@6.19.0(@adonisjs/assembler@7.8.2(typescript@5.4.5))(@vinejs/vine@2.1.0)(edge.js@6.3.0))(@aws-sdk/client-ses@3.911.0)(@types/luxon@3.7.1)(@types/node@20.19.21)(dayjs@1.11.18)(edge.js@6.3.0)(luxon@3.7.2)
       '@rlanz/sentry':
         specifier: ^0.3.3
-        version: 0.3.3
+        version: 0.3.3(patch_hash=440bd8e10e461a07839b1c21e9e6170476bcdd9553e4f9e901f63b0b4ed17f7c)
       '@vinejs/vine':
         specifier: ^2.1.0
         version: 2.1.0
@@ -5170,7 +5175,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@rlanz/sentry@0.3.3':
+  '@rlanz/sentry@0.3.3(patch_hash=440bd8e10e461a07839b1c21e9e6170476bcdd9553e4f9e901f63b0b4ed17f7c)':
     dependencies:
       '@poppinss/utils': 6.10.1
       '@sentry/node': 9.46.0

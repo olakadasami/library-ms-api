@@ -56,6 +56,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * @note You should not attempt to send a response from this method.
    */
   async report(error: unknown, ctx: HttpContext) {
+    Sentry.captureException(error)
     if (this.shouldReport(error as any)) {
       Sentry.captureException(error)
     }

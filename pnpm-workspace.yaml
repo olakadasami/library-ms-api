@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@rlanz/sentry': patches/@rlanz__sentry.patch
