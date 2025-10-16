@@ -12,6 +12,7 @@
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "packageManager": "pnpm@10.11.0",
     "typecheck": "tsc --noEmit"
   },
   "imports": {
